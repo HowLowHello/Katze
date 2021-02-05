@@ -1,0 +1,54 @@
+modLoader="javafml" #mandatory
+
+loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+issueTrackerURL="http://my.issue.tracker/" #optional
+
+license="<I am a proper license>"
+
+[[mods]] #mandatory
+
+modId="katze_adventure" #mandatory
+
+version="1.16.4-1.0.0" #mandatory
+
+Version="1.16.4-1.0.0"
+
+IssueURL=""
+
+ExceptionMessage=""
+
+displayName="How's Katze Adventure" #mandatory
+
+updateJSONURL="http://myurl.me/" #optional
+
+displayURL="http://mctokoyo.com/" #optional
+
+logoFile="logo.png" #optional
+
+credits="Thanks to TechnoVision's channel on Youtube!" #optional
+
+authors="How_Low_Hello" #optional
+
+description='''
+A mod originally made for How_Low_Hello's dedicated server.
+'''
+
+[[dependencies.examplemod]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[31,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"

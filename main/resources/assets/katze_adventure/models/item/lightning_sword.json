@@ -1,0 +1,20 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "katze_adventure:items/lightning_sword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "charge": 0.5
+      },
+      "model": "katze_adventure:item/lightning_sword_charge_0"
+    },
+    {
+      "predicate": {
+        "charge": 1
+      },
+      "model": "katze_adventure:item/lightning_sword_charge_1"
+    }
+  ]
+}

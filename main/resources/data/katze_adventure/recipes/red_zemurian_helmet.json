@@ -1,0 +1,13 @@
+{
+  "type": "smithing",
+  "base": {
+    "item": "katze_adventure:zemurian_helmet"
+  },
+  "addition": {
+    "item": "katze_adventure:passionate_rouge"
+  },
+
+  "result": {
+    "item": "katze_adventure:red_zemurian_helmet"
+  }
+}

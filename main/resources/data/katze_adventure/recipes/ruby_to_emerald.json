@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "katze_adventure:ruby"
+    },
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "result":
+  {
+    "item": "minecraft:emerald",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "katze_adventure:blocks/ruby_ore"
+  }
+}

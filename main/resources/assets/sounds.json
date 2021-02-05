@@ -1,0 +1,9 @@
+{
+  "heavy_blade": {
+    "category": "item",
+    "subtitle": "katze_adventure.subtitle.heavy_blade",
+    "sounds": [
+      "katze_adventure:heavy_blade"
+    ]
+  }
+}

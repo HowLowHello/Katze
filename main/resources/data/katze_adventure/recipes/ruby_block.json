@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xdx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "tag": "katze_adventure:gems"
+    },
+    "d":
+    {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result":
+  {
+    "item": "katze_adventure:ruby_block",
+    "count": 1
+  }
+}

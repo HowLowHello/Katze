@@ -1,0 +1,18 @@
+{
+  "item.katze_adventure.ruby": "Ruby",
+  "item.katze_adventure.poison_apple": "Poison Apple",
+  "block.katze_adventure.ruby_block": "Block of Ruby",
+  "block.katze_adventure.ruby_ore": "Ruby Ore",
+  "block.katze_adventure.oven": "Oven",
+  "itemGroup.Katze": "How's Katze Adventure",
+  "item.katze_adventure.ruby_sword": "Ruby Sword",
+  "item.katze_adventure.ruby_pickaxe": "Ruby Pickaxe",
+  "item.katze_adventure.ruby_shovel": "Ruby Shovel",
+  "item.katze_adventure.ruby_axe": "Ruby Axe",
+  "item.katze_adventure.ruby_hoe": "Ruby Hoe",
+  "item.katze_adventure.ruby_helmet": "Ruby Helmet",
+  "item.katze_adventure.ruby_chestplate": "Ruby Chestplate",
+  "item.katze_adventure.ruby_leggings": "Ruby Leggings",
+  "item.katze_adventure.ruby_boots": "Ruby Boots",
+  "entity.katze_adventure.hog": "Hog"
+}

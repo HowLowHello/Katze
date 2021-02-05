@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:emerald"
+  },
+  "result": "katze_adventure:ruby",
+  "experience": 1.0,
+  "cookingtime": 100
+}

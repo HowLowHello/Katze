@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "katze_adventure:block/oven" },
+    "facing=south": { "model": "katze_adventure:block/oven", "y":  180},
+    "facing=west": { "model": "katze_adventure:block/oven", "y":  270},
+    "facing=east": { "model": "katze_adventure:block/oven", "y":  90}
+  }
+}

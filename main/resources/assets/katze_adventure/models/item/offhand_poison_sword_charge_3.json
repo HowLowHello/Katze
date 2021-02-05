@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "katze_adventure:items/offhand_poison_sword_charge_3"
+  }
+}

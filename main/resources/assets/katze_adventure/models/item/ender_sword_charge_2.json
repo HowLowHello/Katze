@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "katze_adventure:items/ender_sword_charge_2"
+  }
+}
