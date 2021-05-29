@@ -2,6 +2,7 @@ package com.howlowhello.katze;
 
 import com.howlowhello.katze.entities.*;
 import com.howlowhello.katze.init.*;
+import com.howlowhello.katze.network.KatzePacketHandler;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+
 @Mod("katze_adventure")
 public class Katze {
 
@@ -29,12 +30,16 @@ public class Katze {
         ModEntityType.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEffects.POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModContainerType.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModTileEntityType.TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        /** 载入注册完的实体*/
+        // register network channel and messages
+        KatzePacketHandler.registerMessage();
+
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntityType.HOG.get(), HogEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntityType.ISRA_DYNAME.get(), IsraDynameEntity.setCustomAttributes().create());
@@ -58,4 +63,3 @@ public class Katze {
     };
 
 }
-//哈哈

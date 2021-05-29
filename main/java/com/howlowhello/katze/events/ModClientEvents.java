@@ -8,16 +8,17 @@ import com.howlowhello.katze.entities.IsraDynameEntity;
 import com.howlowhello.katze.init.ModEffects;
 import com.howlowhello.katze.init.ModItems;
 import com.howlowhello.katze.items.BloodyCrest;
-import com.howlowhello.katze.items.armors.*;
+import com.howlowhello.katze.items.TradeBoxOffers;
+import com.howlowhello.katze.items.combat.KatzeShield;
+import com.howlowhello.katze.util.TradeBoxHelper;
 import com.howlowhello.katze.world.siege.BloodyCrestManager;
 import com.howlowhello.katze.world.siege.Siege;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
@@ -152,190 +153,6 @@ public class ModClientEvents {
             }
         }
     }
-
-    /**当玩家同时装备4件带有激情之红升级的防具时，给与套装效果
-     * 相关的塞姆利亚套或者下界合金套均能触发 */
-    @SubscribeEvent (priority = EventPriority.HIGH)
-    public static void onPassionateRouge(AttackEntityEvent event){
-        if (!event.getPlayer().isPotionActive(ModEffects.COOL_DOWN.get()) && !event.getPlayer().getEntityWorld().isRemote){
-
-            if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof RedZemurian
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof RedZemurian
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof RedZemurian
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof RedZemurian
-            ) {
-                event.getPlayer().addPotionEffect(new EffectInstance(Effects.STRENGTH, 3000, 2));
-                event.getPlayer().addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-            }
-            else if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof RedNetherite
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof RedNetherite
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof RedNetherite
-            &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof RedNetherite
-            ){
-                event.getPlayer().addPotionEffect(new EffectInstance(Effects.STRENGTH, 3000, 2));
-                event.getPlayer().addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-            }
-        }
-    }
-
-    /** 在玩家更换装备时
-     * 如果装备的是4件寂静之蓝防具则给与夜视
-     * 可以产生刚佩戴上全套寂静之蓝就获得夜视的效果
-     *
-     * 此外，由于更换手中的物品也视作更换装备事件
-     * 可以时常刷新夜视从而达到常驻效果
-     *
-     * 并且当玩家在水里时额外给与海豚悠游*/
-    @SubscribeEvent (priority = EventPriority.HIGH)
-    public static void onStillBlue(LivingEquipmentChangeEvent event){
-        if (event.getEntityLiving() instanceof ServerPlayerEntity){
-            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
-            if(player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof BlueZemurian
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof BlueZemurian
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof BlueZemurian
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof BlueZemurian
-            )
-            {
-                player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 4800));
-
-                if (player.getEntityWorld().getBlockState(player.getPosition()) == Blocks.WATER.getDefaultState()){
-                    player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 2400));
-                }
-            }
-            else if(player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof BlueNetherite
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof BlueNetherite
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof BlueNetherite
-                    &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof BlueNetherite
-            )
-            {
-                player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 4800));
-
-                if (player.getEntityWorld().getBlockState(player.getPosition()) == Blocks.WATER.getDefaultState()){
-                    player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 2400));
-                }
-            }
-        }
-    }
-
-    /**当玩家同时装备4件带有深邃之黄升级的防具时，给与套装效果
-     * 相关的塞姆利亚套或者下界合金套均能触发 */
-    @SubscribeEvent (priority = EventPriority.HIGH)
-    public static void onDeepOcher(LivingHurtEvent event){
-        if (event.getEntityLiving() instanceof ServerPlayerEntity){
-            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
-            // Check if player is alive and the cooldown timer is ready
-            if (player.isAlive() && !player.isPotionActive(ModEffects.COOL_DOWN.get())){
-
-                if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof YellowZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof YellowZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof YellowZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof YellowZemurian
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 3600, 4));
-                    player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 3600));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-
-                else if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof YellowNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof YellowNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof YellowNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof YellowNetherite
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 3600, 4));
-                    player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 3600));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-            }
-        }
-    }
-
-    /**常青之绿效果一
-     * 使用骨粉时回复饱食度 */
-    @SubscribeEvent
-    public static void onEverGreenHunger(BonemealEvent event){
-
-        // Check if BoneMeal can be applied to this Block
-        if (event.getBlock().getBlock() instanceof IGrowable){
-            IGrowable igrowable = (IGrowable)event.getBlock().getBlock();
-            if (igrowable.canGrow(event.getWorld(), event.getPos(), event.getBlock(), event.getWorld().isRemote))
-
-                if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof GreenZemurian
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof GreenZemurian
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof GreenZemurian
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof GreenZemurian
-                )
-                {
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.SATURATION, 2));
-                }
-                else if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof GreenNetherite
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof GreenNetherite
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof GreenNetherite
-                        &&  event.getPlayer().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof GreenNetherite
-                )
-                {
-                    event.getPlayer().addPotionEffect(new EffectInstance(Effects.SATURATION, 2));
-                }
-        }
-    }
-
-    /**常青之绿效果二
-     *
-     * 以及深渊之影套装效果
-     *
-     * 跳跃时给予玩家状态效果加成，有冷却 */
-    @SubscribeEvent (priority = EventPriority.HIGH)
-    public static void onEverGreenAndAbyssShadow(LivingEvent.LivingJumpEvent event){
-
-        if (event.getEntityLiving() instanceof ServerPlayerEntity){
-            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
-            if (!player.isPotionActive(ModEffects.COOL_DOWN.get())){
-
-                if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof GreenZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof GreenZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof GreenZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof GreenZemurian
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.SPEED, 3600));
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 3600));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-                else if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof GreenNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof GreenNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof GreenNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof GreenNetherite
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.SPEED, 3600));
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 3600));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-                else if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof DarkZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof DarkZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof DarkZemurian
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof DarkZemurian
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.SPEED, 3000, 2));
-                    player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3000));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-                else if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() instanceof DarkNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof DarkNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() instanceof DarkNetherite
-                        &&  player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() instanceof DarkNetherite
-                )
-                {
-                    player.addPotionEffect(new EffectInstance(Effects.SPEED, 3000, 2));
-                    player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 3000));
-                    player.addPotionEffect(new EffectInstance(ModEffects.COOL_DOWN.get(), 7200));
-                }
-            }
-        }
-    }
-
 
 
     /**
@@ -776,10 +593,42 @@ public class ModClientEvents {
                     }
                 }
             }
-
         }
-
     }
 
+    /**
+    @SubscribeEvent (priority = EventPriority.HIGH)
+    public static void onShieldSpeciality(LivingHurtEvent event){
+
+        if (event.getEntityLiving() instanceof ServerPlayerEntity){
+            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
+
+            if (player.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() instanceof KatzeShield){
+                ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
+                KatzeShield shield = (KatzeShield) stack.getItem();
+                CompoundNBT tag = stack.getOrCreateTag();
+
+                if (tag.getInt("katze_shield_charge") > shield.getSpellExpense()){
+                    // Cast spell
+                    if (shield.castSpell(player)){
+                        // Prevent the damage
+                        event.setAmount(0);
+                        // update the charger tag
+                        tag.putInt("katze_shield_charge", tag.getInt("katze_shield_charge") - shield.getSpellExpense());
+                    }
+                }
+            }
+        }
+    }*/
+
+    @SubscribeEvent (priority = EventPriority.HIGH)
+    public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event){
+        if (event.getPlayer() instanceof ServerPlayerEntity){
+            ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+            if (!player.getPersistentData().contains(Katze.MOD_ID+"offersModificationDate")){
+                TradeBoxHelper.writeOffers(player, new TradeBoxOffers(7));
+            }
+        }
+    }
 
 }

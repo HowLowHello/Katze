@@ -1,14 +1,14 @@
 {
     "parent":"katze_adventure:item/shield_base",
     "textures": {
-        "layer0":"katze_adventure:items/burst_shield"
+        "layer0":"katze_adventure:items/poison_fang_shield"
     },
     "overrides": [
         {
             "predicate": {
                 "blocking": 1
             },
-            "model": "katze_adventure:item/burst_shield_blocking"
+            "model": "katze_adventure:item/poison_fang_shield_blocking"
         }
     ]
 }

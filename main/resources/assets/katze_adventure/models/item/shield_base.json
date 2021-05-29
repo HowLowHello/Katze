@@ -1,31 +1,27 @@
 {
-    "parent":"katze_adventure:item/shield_base_blocking",
-    "textures": {
-        "layer0":"katze_adventure:items/burst_shield"
-    },
-	
-	"display": {
+    "parent":"builtin/generated",
+    "display": {
 		"thirdperson_righthand": {
-			"rotation": [ 40, 330, 0 ],
-			"translation": [ 0.00, 0.00, -1.00 ],
+			"rotation": [ 60, 320, 0 ],
+			"translation": [ 0.50, 1.00, 0.00 ],
 			"scale": [ 1.00, 1.00, 1.00 ]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [ 40, 330, 0 ],
-			"translation": [ 0.00, 0.00, -1.00 ],
+			"rotation": [ 60, 320, 0 ],
+			"translation": [ 0.50, 1.00, 0.00 ],
 			"scale": [ 1.00, 1.00, 1.00 ]
 		},
-		"firstperson_righthand": {
-			"rotation": [ 0, 0, 20 ],
-			"translation": [ -6.00, 0.50, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		},
-		"firstperson_lefthand": {
-			"rotation": [ 0, 0, 20 ],
-			"translation": [ -6.00, 0.50, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		},
-		"gui": {
+        "firstperson_righthand": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 1.00, -2.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 1.00, -2.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "gui": {
 			"rotation": [ 0, 0, 0 ],
 			"translation": [ 0.00, 0.00, 0.00 ],
 			"scale": [ 1.00, 1.00, 1.00 ]
@@ -45,5 +41,5 @@
 			"translation": [ 0.00, 3.00, 0.00 ],
 			"scale": [ 0.75, 0.75, 0.75 ]
 		}
-	}
+    }
 }

@@ -4,13 +4,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
@@ -28,17 +31,6 @@ public class LightningSword extends SwordItem {
     }
 
 
-    @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-
-        if (stack.getTag() != null && !stack.getTag().contains("counts")){
-            // create a NBT tag if there isn't
-            stack.getTag().putInt("counts", 0);
-        }
-
-        return super.hitEntity(stack, target, attacker);
-    }
-
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
@@ -48,18 +40,20 @@ public class LightningSword extends SwordItem {
 
                 EntityRayTraceResult result = LightningSword.rayTrace(worldIn, playerIn, playerIn.getBoundingBox().grow(range));
                 if (result != null){
-                    Vector3i blockpos = new Vector3i(result.getHitVec().x, result.getHitVec().y, result.getHitVec().z);
-                    LightningBoltEntity lightningboltentity = EntityType.LIGHTNING_BOLT.create(worldIn);
-                    lightningboltentity.moveForced(Vector3d.copyCenteredHorizontally(blockpos));
-                    lightningboltentity.setCaster(playerIn instanceof ServerPlayerEntity ? (ServerPlayerEntity) playerIn : null);
-                    worldIn.addEntity(lightningboltentity);
-                    result.getEntity().playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 5.0F, 1.0F);
+                    if (!(result.getEntity() instanceof ItemEntity)){
+                        Vector3i blockpos = new Vector3i(result.getHitVec().x, result.getHitVec().y, result.getHitVec().z);
+                        LightningBoltEntity lightningboltentity = EntityType.LIGHTNING_BOLT.create(worldIn);
+                        lightningboltentity.moveForced(Vector3d.copyCenteredHorizontally(blockpos));
+                        lightningboltentity.setCaster(playerIn instanceof ServerPlayerEntity ? (ServerPlayerEntity) playerIn : null);
+                        worldIn.addEntity(lightningboltentity);
+                        result.getEntity().playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 5.0F, 1.0F);
 
-                    stack.getTag().putInt("counts", stack.getTag().getInt("counts") - 16);
-                    // only allow the player to teleport every 2 seconds
-                    playerIn.getCooldownTracker().setCooldown(this, 40);
+                        stack.getTag().putInt("counts", stack.getTag().getInt("counts") - 16);
+                        // only allow the player to cast lightning every 4 seconds
+                        playerIn.getCooldownTracker().setCooldown(this, 80);
 
-                    return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
+                        return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
+                    }
                 }
 
             }
@@ -100,5 +94,27 @@ public class LightningSword extends SwordItem {
         }
 
         return entity == null ? null : new EntityRayTraceResult(entity);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            ItemStack item = new ItemStack(this);
+            item.getOrCreateTag().putInt("counts", 0);
+            items.add(item);
+        }
+    }
+
+    @Override
+    public ItemStack getDefaultInstance() {
+        ItemStack item = new ItemStack(this);
+        item.getOrCreateTag().putInt("counts", 0);
+        return item;
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        stack.getOrCreateTag().putInt("counts", 0);
+        super.onCreated(stack, worldIn, playerIn);
     }
 }

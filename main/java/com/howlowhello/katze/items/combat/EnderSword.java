@@ -1,12 +1,13 @@
 package com.howlowhello.katze.items.combat;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -20,16 +21,6 @@ public class EnderSword extends SwordItem {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
     }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-
-        if (stack.getTag() != null && !stack.getTag().contains("counts")){
-            // create a NBT tag if there isn't
-            stack.getTag().putInt("counts", 0);
-        }
-
-        return super.hitEntity(stack, target, attacker);
-    }
 
 
     @Override
@@ -71,5 +62,27 @@ public class EnderSword extends SwordItem {
         float f7 = f2 * f4;
         Vector3d vec3d1 = vec3d.add((double)f6 * range, (double)f5 * range, (double)f7 * range);
         return worldIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            ItemStack item = new ItemStack(this);
+            item.getOrCreateTag().putInt("counts", 0);
+            items.add(item);
+        }
+    }
+
+    @Override
+    public ItemStack getDefaultInstance() {
+        ItemStack item = new ItemStack(this);
+        item.getOrCreateTag().putInt("counts", 0);
+        return item;
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        stack.getOrCreateTag().putInt("counts", 0);
+        super.onCreated(stack, worldIn, playerIn);
     }
 }

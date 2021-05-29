@@ -1,8 +1,5 @@
 {
-    "parent":"katze_adventure:item/shield_base_blocking",
-    "textures": {
-        "layer0":"katze_adventure:items/burst_shield"
-    },
+    "parent":"builtin/generated",
 	
 	"display": {
 		"thirdperson_righthand": {
@@ -17,12 +14,12 @@
 		},
 		"firstperson_righthand": {
 			"rotation": [ 0, 0, 20 ],
-			"translation": [ -6.00, 0.50, 0.00 ],
+			"translation": [ -6.00, 2.00, 0.00 ],
 			"scale": [ 1.00, 1.00, 1.00 ]
 		},
 		"firstperson_lefthand": {
 			"rotation": [ 0, 0, 20 ],
-			"translation": [ -6.00, 0.50, 0.00 ],
+			"translation": [ -6.00, 2.00, 0.00 ],
 			"scale": [ 1.00, 1.00, 1.00 ]
 		},
 		"gui": {

@@ -2,22 +2,37 @@ package com.howlowhello.katze.util;
 
 import com.howlowhello.katze.Katze;
 import com.howlowhello.katze.client.entity.render.*;
+import com.howlowhello.katze.init.ModContainerType;
 import com.howlowhello.katze.init.ModEntityType;
 import com.howlowhello.katze.init.ModItems;
+import com.howlowhello.katze.inventory.TradeBoxScreen;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = Katze.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        // register screens
+        ScreenManager.registerFactory(ModContainerType.TRADE_BOX.get(), TradeBoxScreen::new);
+
+        // register keybindings
+        ClientRegistry.registerKeyBinding(KeyboardHelper.MODE_SWITCHING);
+
+        // register entity model renderers
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.HOG.get(), HogRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.ISRA_DYNAME.get(), IsraDynameRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.PLAYER_ISRA_DYNAME.get(), PlayerIsraDynameRenderer::new);
@@ -25,6 +40,17 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.HEAVY_RUBY.get(), HeavyRubyRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.ORTHEIM.get(), OrtheimRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityType.FATE_SPINNER.get(), FateSpinnerRenderer::new);
+
+        // register item model properties
+        ItemModelsProperties.registerProperty(ModItems.BURST_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, worldIn, entityIn) -> {
+            return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == itemStack ? 1.0F : 0.0F;
+        });
+
+        ItemModelsProperties.registerProperty(ModItems.POISON_FANG_SHIELD.get(), new ResourceLocation("blocking"), (itemStack, worldIn, entityIn) -> {
+            return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == itemStack ? 1.0F : 0.0F;
+        });
+
+
 
         ItemModelsProperties.registerProperty(ModItems.ENDER_SWORD.get(), new ResourceLocation("charge"), (itemStack, worldIn, entityIn) -> {
             if (itemStack.getTag() != null){

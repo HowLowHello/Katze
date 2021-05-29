@@ -1,4 +1,9 @@
 {
+  "key.katze_adventure.main_category": "How的灵猫冒险",
+  "key.katze_adventure.mode_switching": "切换增益模式",
+
+  "itemGroup.Katze": "How's Katze Adventure",
+
   "item.katze_adventure.ruby": "红宝石",
   "item.katze_adventure.ruby_sword": "红宝石剑",
   "item.katze_adventure.ruby_pickaxe": "红宝石镐",
@@ -10,6 +15,13 @@
   "item.katze_adventure.ruby_leggings": "红宝石护腿",
   "item.katze_adventure.ruby_boots": "红宝石靴子",
   "item.katze_adventure.zemurian_sword": "§b塞姆利亚剑",
+  "item.katze_adventure.zemurian_pickaxe": "§b塞姆利亚镐",
+  "item.katze_adventure.zemurian_shovel": "§b塞姆利亚铲",
+  "item.katze_adventure.zemurian_axe": "§b塞姆利亚斧",
+  "item.katze_adventure.zemurian_helmet": "§b塞姆利亚头盔",
+  "item.katze_adventure.zemurian_chestplate": "§b塞姆利亚胸甲",
+  "item.katze_adventure.zemurian_leggings": "§b塞姆利亚护腿",
+  "item.katze_adventure.zemurian_boots": "§b塞姆利亚靴子",
 
   "item.katze_adventure.poison_apple": "毒苹果",
   "item.katze_adventure.bloody_crest": "§4鲜血魔器",
@@ -26,12 +38,26 @@
   "item.katze_adventure.mainhand_poison_sword": "§2幸存者之剑",
   "item.katze_adventure.mainhand_slowness_sword": "§1幸存者之剑",
 
+  "item.katze_adventure.burst_shield": "§b爆裂席瓦",
+  "item.katze_adventure.poison_fang_shield": "§b锋月·毒",
+
   "item.katze_adventure.kaleido_bow": "§d奇弓“花样百出”",
   "item.katze_adventure.animistic_bow": "§b精灵弓“悠久之翼”",
   "item.katze_adventure.solar_storm_bow": "§6太阳风暴",
   "item.katze_adventure.binary_bow": "§4炼狱·双子速弓",
-  "item.katze_adventure.lightning_bow": "§b静电龙弓",
-  "item.katze_adventure.thor_bow": "§b雷矢·苏我的神鸣",
+  "item.katze_adventure.lightning_bow": "§b苏我的雷鸣",
+  "item.katze_adventure.thor_bow": "§bex·静电龙弓",
+
+  "item.katze_adventure.red_emblem": "红色纹章",
+  "item.katze_adventure.passionate_rouge": "§4激情之红",
+  "item.katze_adventure.blue_emblem": "蓝色纹章",
+  "item.katze_adventure.still_blue": "§9寂静之蓝",
+  "item.katze_adventure.yellow_emblem": "黄色纹章",
+  "item.katze_adventure.deep_ocher": "§6深邃之黄",
+  "item.katze_adventure.green_emblem": "绿色纹章",
+  "item.katze_adventure.ever_green": "§a常青之绿",
+  "item.katze_adventure.dark_emblem": "黑色纹章",
+  "item.katze_adventure.abyss_shadow": "§5深渊之影",
 
   "item.katze_adventure.restorative_berries": "§d活力浆果",
   "item.katze_adventure.searing_berries": "§4诡计恶魔浆果",
@@ -49,8 +75,6 @@
   "block.katze_adventure.ruby_ore": "红宝石矿",
   "block.katze_adventure.oven": "迷你炉",
 
-  "itemGroup.Katze": "How's Katze Adventure",
-
   "entity.katze_adventure.hog": "野猪",
   "entity.katze_adventure.direwolf": "魔煌兵“恐狼”",
   "entity.katze_adventure.ortheim": "魔煌兵“原乡种”",
@@ -61,6 +85,19 @@
   "effect.katze_adventure.cool_down": "冷却时间",
   "effect.katze_adventure.bloody_catastrophe": "§4鲜血灾祸",
   "effect.katze_adventure.changeable_prophesy": "§d变幻的预言",
+
+  "event.katze_adventure.armor_katze_upgrade.message_0": "当前没有装备多次升级过的护甲或套装升级不一致",
+  "event.katze_adventure.armor_katze_upgrade.message_1": "当前激活增益：红色纹章",
+  "event.katze_adventure.armor_katze_upgrade.message_2": "当前激活增益：蓝色纹章",
+  "event.katze_adventure.armor_katze_upgrade.message_3": "当前激活增益：黄色纹章",
+  "event.katze_adventure.armor_katze_upgrade.message_4": "当前激活增益：绿色纹章",
+  "event.katze_adventure.armor_katze_upgrade.message_5": "当前激活增益：黑色纹章",
+  "event.katze_adventure.armor_katze_upgrade.message_21": "当前激活增益：激情之红",
+  "event.katze_adventure.armor_katze_upgrade.message_22": "当前激活增益：寂静之蓝",
+  "event.katze_adventure.armor_katze_upgrade.message_23": "当前激活增益：深邃之黄",
+  "event.katze_adventure.armor_katze_upgrade.message_24": "当前激活增益：常青之绿",
+  "event.katze_adventure.armor_katze_upgrade.message_25": "当前激活增益：深渊之影",
+  "event.katze_adventure.armor_katze_upgrade.tooltip_1": "目前已安装的升级：",
 
   "event.katze_adventure.lightning_bow.information_1": "每射中一箭都会蓄力，十层后带来唤雷效果",
   "event.katze_adventure.thor_bow.information_1": "§e成为雷电的象征吧",

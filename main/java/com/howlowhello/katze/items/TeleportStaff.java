@@ -63,7 +63,7 @@ public class TeleportStaff extends Item {
             playerIn.sendBreakAnimation(EquipmentSlotType.MAINHAND);
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
     }
 
     // the same as Item.rayTrace(World, PlayerEntity, FluidMode) but with a longer range

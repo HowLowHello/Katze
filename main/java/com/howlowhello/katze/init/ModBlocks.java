@@ -19,4 +19,5 @@ public class ModBlocks {
     // Extra Blocks
     public static final RegistryObject<Block> SEPITH_BLOCK = BLOCKS.register("sepith_block", SepithBlock::new);
     public static final RegistryObject<Block> HALO_BERRY_BUSH = BLOCKS.register("halo_berry_bush", HaloBerryBushBlock::new);
+    public static final RegistryObject<Block> TRADE_BOX_BLOCK = BLOCKS.register("trade_box_block", TradeBoxBlock::new);
 }

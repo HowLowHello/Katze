@@ -1,15 +1,18 @@
 package com.howlowhello.katze.items.combat;
 
 import com.howlowhello.katze.world.siege.BloodyCrestManager;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 
@@ -19,19 +22,6 @@ public class OffhandPoisonSword extends SwordItem {
     public OffhandPoisonSword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
     }
-
-
-    @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-
-        if (stack.getTag() != null && !stack.getTag().contains("counts")){
-            // create a NBT tag if there isn't
-            stack.getTag().putInt("counts", 0);
-        }
-
-        return super.hitEntity(stack, target, attacker);
-    }
-
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
@@ -66,5 +56,27 @@ public class OffhandPoisonSword extends SwordItem {
 
 
         return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            ItemStack item = new ItemStack(this);
+            item.getOrCreateTag().putInt("counts", 0);
+            items.add(item);
+        }
+    }
+
+    @Override
+    public ItemStack getDefaultInstance() {
+        ItemStack item = new ItemStack(this);
+        item.getOrCreateTag().putInt("counts", 0);
+        return item;
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        stack.getOrCreateTag().putInt("counts", 0);
+        super.onCreated(stack, worldIn, playerIn);
     }
 }

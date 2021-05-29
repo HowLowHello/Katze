@@ -2,10 +2,10 @@ package com.howlowhello.katze.init;
 
 import com.howlowhello.katze.Katze;
 import com.howlowhello.katze.items.BloodyCrest;
+import com.howlowhello.katze.items.KatzeUpgradeItem;
 import com.howlowhello.katze.items.combat.*;
 import com.howlowhello.katze.items.TeleportStaff;
 import com.howlowhello.katze.items.foods.*;
-import com.howlowhello.katze.items.armors.*;
 import com.howlowhello.katze.util.enums.ModArmorMaterial;
 import com.howlowhello.katze.util.enums.ModItemTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -34,6 +34,9 @@ public class ModItems {
     public static final RegistryObject<ThorBow> THOR_BOW = ITEMS.register("thor_bow", ThorBow::new);
     public static final RegistryObject<SolarStormBow> SOLAR_STORM_BOW = ITEMS.register("solar_storm_bow", SolarStormBow::new);
     public static final RegistryObject<BinaryBow> BINARY_BOW = ITEMS.register("binary_bow", BinaryBow::new);
+
+    public static final RegistryObject<BurstShield> BURST_SHIELD = ITEMS.register("burst_shield", BurstShield::new);
+    public static final RegistryObject<PoisonFangShield> POISON_FANG_SHIELD = ITEMS.register("poison_fang_shield", PoisonFangShield::new);
 
     public static final RegistryObject<InfernalSword> INFERNAL_SWORD = ITEMS.register("infernal_sword",
             () -> new InfernalSword(ItemTier.GOLD, 2, -2.4F, new Item.Properties().group(Katze.TAB)));
@@ -88,16 +91,16 @@ public class ModItems {
     public static final RegistryObject<Item> ZEMURIAN_ORE = ITEMS.register("zemurian_ore", () -> new Item(new Item.Properties().group(Katze.TAB)));
     public static final RegistryObject<Item> ZEMURIAN_DUST = ITEMS.register("zemurian_dust", () -> new Item(new Item.Properties().group(Katze.TAB)));
     public static final RegistryObject<Item> ZEMURIAN_INGOT = ITEMS.register("zemurian_ingot", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> RED_EMBLEM = ITEMS.register("red_emblem", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> PASSIONATE_ROUGE = ITEMS.register("passionate_rouge", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> YELLOW_EMBLEM = ITEMS.register("yellow_emblem", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> DEEP_OCHER = ITEMS.register("deep_ocher", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> BLUE_EMBLEM = ITEMS.register("blue_emblem", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> STILL_BLUE = ITEMS.register("still_blue", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> GREEN_EMBLEM = ITEMS.register("green_emblem", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> EVER_GREEN = ITEMS.register("ever_green", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> DARK_EMBLEM = ITEMS.register("dark_emblem", () -> new Item(new Item.Properties().group(Katze.TAB)));
-    public static final RegistryObject<Item> ABYSS_SHADOW = ITEMS.register("abyss_shadow", () -> new Item(new Item.Properties().group(Katze.TAB)));
+    public static final RegistryObject<KatzeUpgradeItem> RED_EMBLEM = ITEMS.register("red_emblem", () -> new KatzeUpgradeItem(1));
+    public static final RegistryObject<KatzeUpgradeItem> PASSIONATE_ROUGE = ITEMS.register("passionate_rouge", () -> new KatzeUpgradeItem(21));
+    public static final RegistryObject<KatzeUpgradeItem> BLUE_EMBLEM = ITEMS.register("blue_emblem", () -> new KatzeUpgradeItem(2));
+    public static final RegistryObject<KatzeUpgradeItem> STILL_BLUE = ITEMS.register("still_blue", () -> new KatzeUpgradeItem(22));
+    public static final RegistryObject<KatzeUpgradeItem> YELLOW_EMBLEM = ITEMS.register("yellow_emblem", () -> new KatzeUpgradeItem(3));
+    public static final RegistryObject<KatzeUpgradeItem> DEEP_OCHER = ITEMS.register("deep_ocher", () -> new KatzeUpgradeItem(23));
+    public static final RegistryObject<KatzeUpgradeItem> GREEN_EMBLEM = ITEMS.register("green_emblem", () -> new KatzeUpgradeItem(4));
+    public static final RegistryObject<KatzeUpgradeItem> EVER_GREEN = ITEMS.register("ever_green", () -> new KatzeUpgradeItem(24));
+    public static final RegistryObject<KatzeUpgradeItem> DARK_EMBLEM = ITEMS.register("dark_emblem", () -> new KatzeUpgradeItem(5));
+    public static final RegistryObject<KatzeUpgradeItem> ABYSS_SHADOW = ITEMS.register("abyss_shadow", () -> new KatzeUpgradeItem(25));
 
     // Block Items
     /**需要新实参BlockItem类对象，作为注册的对应方块    */
@@ -112,6 +115,9 @@ public class ModItems {
     // Extra Block Items
     public static final RegistryObject<Item> SEPITH_BLOCK_ITEM = ITEMS.register("sepith_block",
             () -> new BlockItem(ModBlocks.SEPITH_BLOCK.get(), new Item.Properties().group(Katze.TAB)));
+
+    public static final RegistryObject<Item> TRADE_BOX_ITEM = ITEMS.register("trade_box_item",
+            () -> new BlockItem(ModBlocks.TRADE_BOX_BLOCK.get(), new Item.Properties().group(Katze.TAB).maxStackSize(1)));
 
     // Tools
     /**需要各种工具类的对象作为实参
@@ -158,66 +164,6 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots",
             () -> new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
 
-    // Red Sepith Armor
-    public static final RegistryObject<RedSepith> RED_SEPITH_HELMET = ITEMS.register("red_sepith_helmet",
-            () -> new RedSepith(ModArmorMaterial.RED_SEPITH, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedSepith> RED_SEPITH_CHESTPLATE = ITEMS.register("red_sepith_chestplate",
-            () -> new RedSepith(ModArmorMaterial.RED_SEPITH, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedSepith> RED_SEPITH_LEGGINGS = ITEMS.register("red_sepith_leggings",
-            () -> new RedSepith(ModArmorMaterial.RED_SEPITH, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedSepith> RED_SEPITH_BOOTS = ITEMS.register("red_sepith_boots",
-            () -> new RedSepith(ModArmorMaterial.RED_SEPITH, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Blue Sepith Armor
-    public static final RegistryObject<BlueSepith> BLUE_SEPITH_HELMET = ITEMS.register("blue_sepith_helmet",
-            () -> new BlueSepith(ModArmorMaterial.BLUE_SEPITH, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueSepith> BLUE_SEPITH_CHESTPLATE = ITEMS.register("blue_sepith_chestplate",
-            () -> new BlueSepith(ModArmorMaterial.BLUE_SEPITH, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueSepith> BLUE_SEPITH_LEGGINGS = ITEMS.register("blue_sepith_leggings",
-            () -> new BlueSepith(ModArmorMaterial.BLUE_SEPITH, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueSepith> BLUE_SEPITH_BOOTS = ITEMS.register("blue_sepith_boots",
-            () -> new BlueSepith(ModArmorMaterial.BLUE_SEPITH, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Yellow Sepith Armor
-    public static final RegistryObject<YellowSepith> YELLOW_SEPITH_HELMET = ITEMS.register("yellow_sepith_helmet",
-            () -> new YellowSepith(ModArmorMaterial.YELLOW_SEPITH, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowSepith> YELLOW_SEPITH_CHESTPLATE = ITEMS.register("yellow_sepith_chestplate",
-            () -> new YellowSepith(ModArmorMaterial.YELLOW_SEPITH, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowSepith> YELLOW_SEPITH_LEGGINGS = ITEMS.register("yellow_sepith_leggings",
-            () -> new YellowSepith(ModArmorMaterial.YELLOW_SEPITH, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowSepith> YELLOW_SEPITH_BOOTS = ITEMS.register("yellow_sepith_boots",
-            () -> new YellowSepith(ModArmorMaterial.YELLOW_SEPITH, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Green Sepith Armor
-    public static final RegistryObject<GreenSepith> GREEN_SEPITH_HELMET = ITEMS.register("green_sepith_helmet",
-            () -> new GreenSepith(ModArmorMaterial.GREEN_SEPITH, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenSepith> GREEN_SEPITH_CHESTPLATE = ITEMS.register("green_sepith_chestplate",
-            () -> new GreenSepith(ModArmorMaterial.GREEN_SEPITH, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenSepith> GREEN_SEPITH_LEGGINGS = ITEMS.register("green_sepith_leggings",
-            () -> new GreenSepith(ModArmorMaterial.GREEN_SEPITH, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenSepith> GREEN_SEPITH_BOOTS = ITEMS.register("green_sepith_boots",
-            () -> new GreenSepith(ModArmorMaterial.GREEN_SEPITH, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Dark Sepith Armor
-    public static final RegistryObject<DarkSepith> DARK_SEPITH_HELMET = ITEMS.register("dark_sepith_helmet",
-            () -> new DarkSepith(ModArmorMaterial.DARK_SEPITH, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkSepith> DARK_SEPITH_CHESTPLATE = ITEMS.register("dark_sepith_chestplate",
-            () -> new DarkSepith(ModArmorMaterial.DARK_SEPITH, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkSepith> DARK_SEPITH_LEGGINGS = ITEMS.register("dark_sepith_leggings",
-            () -> new DarkSepith(ModArmorMaterial.DARK_SEPITH, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkSepith> DARK_SEPITH_BOOTS = ITEMS.register("dark_sepith_boots",
-            () -> new DarkSepith(ModArmorMaterial.DARK_SEPITH, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
     // Zemurian Armor
     public static final RegistryObject<ArmorItem> ZEMURIAN_HELMET = ITEMS.register("zemurian_helmet",
             () -> new ArmorItem(ModArmorMaterial.ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
@@ -230,124 +176,5 @@ public class ModItems {
 
     public static final RegistryObject<ArmorItem> ZEMURIAN_BOOTS = ITEMS.register("zemurian_boots",
             () -> new ArmorItem(ModArmorMaterial.ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Red Zemurian Armor
-    public static final RegistryObject<RedZemurian> RED_ZEMURIAN_HELMET = ITEMS.register("red_zemurian_helmet",
-            () -> new RedZemurian(ModArmorMaterial.RED_ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
 
-    public static final RegistryObject<RedZemurian> RED_ZEMURIAN_CHESTPLATE = ITEMS.register("red_zemurian_chestplate",
-            () -> new RedZemurian(ModArmorMaterial.RED_ZEMURIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedZemurian> RED_ZEMURIAN_LEGGINGS = ITEMS.register("red_zemurian_leggings",
-            () -> new RedZemurian(ModArmorMaterial.RED_ZEMURIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedZemurian> RED_ZEMURIAN_BOOTS = ITEMS.register("red_zemurian_boots",
-            () -> new RedZemurian(ModArmorMaterial.RED_ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Red Netherite Armor
-    public static final RegistryObject<RedNetherite> RED_NETHERITE_HELMET = ITEMS.register("red_netherite_helmet",
-            () -> new RedNetherite(ModArmorMaterial.RED_NETHERITE, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedNetherite> RED_NETHERITE_CHESTPLATE = ITEMS.register("red_netherite_chestplate",
-            () -> new RedNetherite(ModArmorMaterial.RED_NETHERITE, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedNetherite> RED_NETHERITE_LEGGINGS = ITEMS.register("red_netherite_leggings",
-            () -> new RedNetherite(ModArmorMaterial.RED_NETHERITE, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<RedNetherite> RED_NETHERITE_BOOTS = ITEMS.register("red_netherite_boots",
-            () -> new RedNetherite(ModArmorMaterial.RED_NETHERITE, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Blue Zemurian Armor
-    public static final RegistryObject<BlueZemurian> BLUE_ZEMURIAN_HELMET = ITEMS.register("blue_zemurian_helmet",
-            () -> new BlueZemurian(ModArmorMaterial.BLUE_ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueZemurian> BLUE_ZEMURIAN_CHESTPLATE = ITEMS.register("blue_zemurian_chestplate",
-            () -> new BlueZemurian(ModArmorMaterial.BLUE_ZEMURIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueZemurian> BLUE_ZEMURIAN_LEGGINGS = ITEMS.register("blue_zemurian_leggings",
-            () -> new BlueZemurian(ModArmorMaterial.BLUE_ZEMURIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueZemurian> BLUE_ZEMURIAN_BOOTS = ITEMS.register("blue_zemurian_boots",
-            () -> new BlueZemurian(ModArmorMaterial.BLUE_ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Blue Netherite Armor
-    public static final RegistryObject<BlueNetherite> BLUE_NETHERITE_HELMET = ITEMS.register("blue_netherite_helmet",
-            () -> new BlueNetherite(ModArmorMaterial.BLUE_NETHERITE, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueNetherite> BLUE_NETHERITE_CHESTPLATE = ITEMS.register("blue_netherite_chestplate",
-            () -> new BlueNetherite(ModArmorMaterial.BLUE_NETHERITE, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueNetherite> BLUE_NETHERITE_LEGGINGS = ITEMS.register("blue_netherite_leggings",
-            () -> new BlueNetherite(ModArmorMaterial.BLUE_NETHERITE, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<BlueNetherite> BLUE_NETHERITE_BOOTS = ITEMS.register("blue_netherite_boots",
-            () -> new BlueNetherite(ModArmorMaterial.BLUE_NETHERITE, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Yellow Zemurian Armor
-    public static final RegistryObject<YellowZemurian> YELLOW_ZEMURIAN_HELMET = ITEMS.register("yellow_zemurian_helmet",
-            () -> new YellowZemurian(ModArmorMaterial.YELLOW_ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowZemurian> YELLOW_ZEMURIAN_CHESTPLATE = ITEMS.register("yellow_zemurian_chestplate",
-            () -> new YellowZemurian(ModArmorMaterial.YELLOW_ZEMURIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowZemurian> YELLOW_ZEMURIAN_LEGGINGS = ITEMS.register("yellow_zemurian_leggings",
-            () -> new YellowZemurian(ModArmorMaterial.YELLOW_ZEMURIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowZemurian> YELLOW_ZEMURIAN_BOOTS = ITEMS.register("yellow_zemurian_boots",
-            () -> new YellowZemurian(ModArmorMaterial.YELLOW_ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Yellow Netherite Armor
-    public static final RegistryObject<YellowNetherite> YELLOW_NETHERITE_HELMET = ITEMS.register("yellow_netherite_helmet",
-            () -> new YellowNetherite(ModArmorMaterial.YELLOW_NETHERITE, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowNetherite> YELLOW_NETHERITE_CHESTPLATE = ITEMS.register("yellow_netherite_chestplate",
-            () -> new YellowNetherite(ModArmorMaterial.YELLOW_NETHERITE, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowNetherite> YELLOW_NETHERITE_LEGGINGS = ITEMS.register("yellow_netherite_leggings",
-            () -> new YellowNetherite(ModArmorMaterial.YELLOW_NETHERITE, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<YellowNetherite> YELLOW_NETHERITE_BOOTS = ITEMS.register("yellow_netherite_boots",
-            () -> new YellowNetherite(ModArmorMaterial.YELLOW_NETHERITE, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Green Zemurian Armor
-    public static final RegistryObject<GreenZemurian> GREEN_ZEMURIAN_HELMET = ITEMS.register("green_zemurian_helmet",
-            () -> new GreenZemurian(ModArmorMaterial.GREEN_ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenZemurian> GREEN_ZEMURIAN_CHESTPLATE = ITEMS.register("green_zemurian_chestplate",
-            () -> new GreenZemurian(ModArmorMaterial.GREEN_ZEMURIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenZemurian> GREEN_ZEMURIAN_LEGGINGS = ITEMS.register("green_zemurian_leggings",
-            () -> new GreenZemurian(ModArmorMaterial.GREEN_ZEMURIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenZemurian> GREEN_ZEMURIAN_BOOTS = ITEMS.register("green_zemurian_boots",
-            () -> new GreenZemurian(ModArmorMaterial.GREEN_ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Green Netherite Armor
-    public static final RegistryObject<GreenNetherite> GREEN_NETHERITE_HELMET = ITEMS.register("green_netherite_helmet",
-            () -> new GreenNetherite(ModArmorMaterial.GREEN_NETHERITE, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenNetherite> GREEN_NETHERITE_CHESTPLATE = ITEMS.register("green_netherite_chestplate",
-            () -> new GreenNetherite(ModArmorMaterial.GREEN_NETHERITE, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenNetherite> GREEN_NETHERITE_LEGGINGS = ITEMS.register("green_netherite_leggings",
-            () -> new GreenNetherite(ModArmorMaterial.GREEN_NETHERITE, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<GreenNetherite> GREEN_NETHERITE_BOOTS = ITEMS.register("green_netherite_boots",
-            () -> new GreenNetherite(ModArmorMaterial.GREEN_NETHERITE, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Dark Zemurian Armor
-    public static final RegistryObject<DarkZemurian> DARK_ZEMURIAN_HELMET = ITEMS.register("dark_zemurian_helmet",
-            () -> new DarkZemurian(ModArmorMaterial.DARK_ZEMURIAN, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkZemurian> DARK_ZEMURIAN_CHESTPLATE = ITEMS.register("dark_zemurian_chestplate",
-            () -> new DarkZemurian(ModArmorMaterial.DARK_ZEMURIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkZemurian> DARK_ZEMURIAN_LEGGINGS = ITEMS.register("dark_zemurian_leggings",
-            () -> new DarkZemurian(ModArmorMaterial.DARK_ZEMURIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkZemurian> DARK_ZEMURIAN_BOOTS = ITEMS.register("dark_zemurian_boots",
-            () -> new DarkZemurian(ModArmorMaterial.DARK_ZEMURIAN, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
-    // Dark Netherite Armor
-    public static final RegistryObject<DarkNetherite> DARK_NETHERITE_HELMET = ITEMS.register("dark_netherite_helmet",
-            () -> new DarkNetherite(ModArmorMaterial.DARK_NETHERITE, EquipmentSlotType.HEAD, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkNetherite> DARK_NETHERITE_CHESTPLATE = ITEMS.register("dark_netherite_chestplate",
-            () -> new DarkNetherite(ModArmorMaterial.DARK_NETHERITE, EquipmentSlotType.CHEST, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkNetherite> DARK_NETHERITE_LEGGINGS = ITEMS.register("dark_netherite_leggings",
-            () -> new DarkNetherite(ModArmorMaterial.DARK_NETHERITE, EquipmentSlotType.LEGS, new Item.Properties().group(Katze.TAB)));
-
-    public static final RegistryObject<DarkNetherite> DARK_NETHERITE_BOOTS = ITEMS.register("dark_netherite_boots",
-            () -> new DarkNetherite(ModArmorMaterial.DARK_NETHERITE, EquipmentSlotType.FEET, new Item.Properties().group(Katze.TAB)));
 }

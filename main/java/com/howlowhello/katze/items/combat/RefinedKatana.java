@@ -2,10 +2,17 @@ package com.howlowhello.katze.items.combat;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EnderChestInventory;
+import net.minecraft.inventory.container.ChestContainer;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -59,5 +66,22 @@ public class RefinedKatana extends SwordItem {
             item.addEnchantment(Enchantments.LOOTING, 3);
             items.add(item);
         }
+    }
+
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    {
+
+        EnderChestInventory enderChest = player.getInventoryEnderChest();
+
+        if (enderChest != null)
+        {
+            if (!world.isRemote)
+            {
+                player.openContainer(new SimpleNamedContainerProvider((windowID, playerInventory, inventoryIn) -> {
+                    return ChestContainer.createGeneric9X3(windowID, playerInventory, enderChest);
+                }, new TranslationTextComponent("item.gobber2.gobber2_ring_enderchest.title")));
+            }
+        }
+        return new ActionResult<ItemStack>(ActionResultType.PASS, player.getHeldItem(hand));
     }
 }
